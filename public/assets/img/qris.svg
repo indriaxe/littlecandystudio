@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+  <rect width="300" height="300" rx="18" fill="#fff"/>
+  <rect x="12" y="12" width="276" height="276" rx="12" fill="none" stroke="#a23336" stroke-width="4" stroke-dasharray="10 8"/>
+  <text x="150" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="46" font-weight="700" fill="#a23336">QRIS</text>
+  <text x="150" y="160" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#3a1f20">Gambar QRIS belum dipasang</text>
+  <text x="150" y="188" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#8a6a68">Admin &gt; Pengaturan &gt; Upload QRIS</text>
+  <text x="150" y="208" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" fill="#8a6a68">atau ganti file assets/img/qris.svg</text>
+</svg>

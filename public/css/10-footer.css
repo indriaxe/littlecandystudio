@@ -1,0 +1,50 @@
+/* ==========================================================
+   FILE : css/10-footer.css
+   ISI  : Footer (tampilan sama seperti v2)
+   ========================================================== */
+
+/* --- FOOTER --- */
+footer {
+  background: #5d1c2e;
+  color: #f3d9de;
+  padding: 44px 3vw calc(24px + env(safe-area-inset-bottom, 0px));
+  margin-top: 40px;
+}
+.fg3 {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 36px;
+  font-size: 0.92rem;
+  max-width: 1600px;
+  margin: auto;
+}
+footer h3 {
+  font-family: "Young Serif", Georgia, serif;
+  font-weight: 400;
+  color: #e9a9b4;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+footer a {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+}
+footer a:hover {
+  color: #e9a9b4;
+}
+.sm2 {
+  grid-column: 1/-1;
+  font-size: 0.78rem;
+  opacity: 0.7;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+@media (max-width: 760px) {
+  .fg3 {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}

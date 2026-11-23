@@ -1,0 +1,98 @@
+/* ==========================================================
+   FILE : css/09-modal-toast.css
+   ISI  : Popup detail produk & toast
+   ========================================================== */
+
+/* --- MODAL / POPUP --- */
+.ov {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: #2a0d0e99;
+  backdrop-filter: blur(6px);
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.35s;
+}
+.ov.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+.md {
+  background: var(--card);
+  border-radius: 28px;
+  max-width: 760px;
+  width: 100%;
+  max-height: 90vh;
+  overflow: auto;
+  transform: translateY(30px) scale(0.94);
+  transition: 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+  position: relative;
+}
+.ov.show .md {
+  transform: none;
+}
+.md .x {
+  position: absolute;
+  right: 14px;
+  top: 12px;
+  z-index: 2;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--soft);
+  color: var(--h);
+  font-size: 1.2rem;
+}
+.pd {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+@media (max-width: 640px) {
+  .pd {
+    grid-template-columns: 1fr;
+  }
+}
+.pd > img,
+.pd > .im {
+  height: 100%;
+  min-height: 300px;
+  border-radius: 0;
+  aspect-ratio: auto;
+  object-fit: cover;
+}
+.pd > div:last-child {
+  padding: 30px 26px;
+}
+.pd .pc {
+  font-family: "Bagel Fat One";
+  font-size: 1.6rem;
+  color: var(--h);
+  margin: 6px 0;
+}
+.md .ft {
+  padding: 30px;
+  text-align: center;
+}
+
+/* --- TOAST (notifikasi kecil) --- */
+#toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  transform: translate(-50%, 120px);
+  background: var(--pr);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 99px;
+  z-index: 120;
+  transition: 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.3);
+  box-shadow: var(--sh);
+  pointer-events: none;
+}
+#toast.show {
+  transform: translate(-50%, 0);
+}

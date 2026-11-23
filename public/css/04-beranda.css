@@ -1,0 +1,318 @@
+/* ==========================================================
+   FILE : css/04-beranda.css
+   ISI  : Banner, marquee, kategori, About, statistik
+   ========================================================== */
+
+/* --- BANNER / HERO SLIDER --- */
+.hero {
+  position: relative;
+  border-radius: 32px;
+  overflow: hidden;
+  height: min(72vh, 560px);
+  box-shadow: var(--sh);
+  background: var(--ft);
+}
+.sl {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.2s;
+  display: flex;
+}
+.sl.on {
+  opacity: 1;
+}
+.sl img {
+  flex: 1;
+  min-width: 0;
+  object-fit: cover;
+  height: 100%;
+}
+.sl.on img {
+  animation: kb 9s ease-out forwards;
+}
+@keyframes kb {
+  from {
+    transform: scale(1.12);
+  }
+}
+.sl img:nth-child(n + 3) {
+  display: none;
+}
+@media (min-width: 760px) {
+  .sl img:nth-child(3) {
+    display: block;
+  }
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 35%, rgba(90, 20, 24, 0.9));
+}
+.ht {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 28px 6%;
+  color: #fff;
+}
+.ht h1 {
+  color: #fff;
+  font-size: clamp(2rem, 5.5vw, 3.8rem);
+}
+.ht p {
+  opacity: 0.92;
+  margin: 6px 0 18px;
+  max-width: 46ch;
+}
+.ht .pill {
+  background: var(--gold);
+  color: #5a1a1c;
+  margin-right: 8px;
+}
+.ht .pill.ol {
+  background: transparent;
+  color: #fff;
+  border-color: #fff;
+}
+.dots {
+  position: absolute;
+  z-index: 3;
+  right: 24px;
+  bottom: 28px;
+  display: flex;
+  gap: 8px;
+}
+.dots i {
+  width: 10px;
+  height: 10px;
+  border-radius: 9px;
+  background: #fff6;
+  cursor: pointer;
+  transition: 0.4s;
+}
+.dots i.on {
+  width: 30px;
+  background: var(--gold);
+}
+
+/* --- TEKS BERJALAN (MARQUEE) --- */
+.mq {
+  overflow: hidden;
+  margin: 26px -3vw;
+  background: var(--pr);
+  color: #fff;
+  padding: 10px 0;
+  font-family: "Baloo 2";
+  font-weight: 700;
+  white-space: nowrap;
+}
+.mq div {
+  display: inline-block;
+  animation: mq 28s linear infinite;
+}
+@keyframes mq {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* --- KATEGORI BOUQUET --- */
+.cats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 22px;
+  margin-top: 20px;
+}
+.cat {
+  text-align: center;
+  cursor: pointer;
+  background: none;
+}
+.cat .im {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  max-width: 210px;
+  margin: auto;
+  box-shadow: var(--sh);
+}
+.cat:hover .im {
+  transform: scale(1.06) rotate(3deg);
+}
+.cat .im {
+  transition: 0.5s;
+}
+.cat span {
+  display: inline-block;
+  margin-top: 12px;
+  background: var(--pr);
+  color: #fff;
+  font-family: "Baloo 2";
+  font-weight: 700;
+  padding: 2px 20px;
+  border-radius: 9px;
+  transition: 0.3s;
+}
+.cat .noimg {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  font-size: 3rem;
+  background: var(--soft);
+}
+.cat span small {
+  display: block;
+  font-family: Poppins, sans-serif;
+  font-weight: 400;
+  font-size: 0.72rem;
+  line-height: 1.3;
+  padding-bottom: 2px;
+  opacity: 0.9;
+}
+.cat:hover span {
+  background: var(--pr2);
+  letter-spacing: 0.04em;
+}
+
+/* --- BAGIAN ABOUT --- */
+.abt {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 18px;
+  margin-top: 22px;
+}
+.ab {
+  background: var(--card);
+  border: 2px solid var(--pr);
+  border-radius: 28px 6px 28px 6px;
+  padding: 24px 16px;
+  text-align: center;
+  transition: 0.4s;
+}
+.ab:hover {
+  transform: translateY(-6px) rotate(1deg);
+  background: var(--soft);
+}
+.ab svg {
+  width: 58px;
+  height: 58px;
+  stroke: var(--pr);
+  fill: none;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.ab b {
+  display: block;
+  font-family: "Baloo 2";
+  color: var(--h);
+  margin-top: 6px;
+  font-size: 1.1rem;
+}
+.ab p {
+  font-size: 0.83rem;
+  color: var(--mut);
+}
+
+/* --- LABEL KECIL DI BANNER --- */
+.chip {
+  display: inline-block;
+  background: var(--gold);
+  color: #5a1a1c;
+  padding: 3px 14px;
+  border-radius: 99px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+/* --- CARA PESAN (4 langkah) --- */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 18px;
+  counter-reset: s;
+}
+.st {
+  background: var(--card);
+  border: 2px solid var(--pr);
+  border-radius: 28px 6px 28px 6px;
+  padding: 20px 20px 22px;
+  transition: 0.4s;
+}
+.st:hover {
+  transform: translateY(-6px) rotate(-1deg);
+  background: var(--soft);
+}
+.st::before {
+  counter-increment: s;
+  content: counter(s);
+  display: block;
+  font-family: "Bagel Fat One";
+  font-size: 2.4rem;
+  line-height: 1.1;
+  color: var(--pr);
+  opacity: 0.55;
+}
+.st b {
+  display: block;
+  font-family: "Baloo 2";
+  color: var(--h);
+  font-size: 1.1rem;
+}
+.st p {
+  font-size: 0.86rem;
+  color: var(--mut);
+}
+
+/* --- GALERI MOMEN --- */
+.gal {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+}
+.gal img {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  display: block;
+  border-radius: 22px;
+  box-shadow: var(--sh);
+}
+@media (max-width: 1100px) {
+  .gal {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .gal {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* --- STATISTIK & JARAK ANTAR BAGIAN --- */
+.stats {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin: 60px 0 10px;
+  text-align: center;
+}
+.stats b {
+  font-family: "Bagel Fat One";
+  font-size: 2.4rem;
+  color: var(--h);
+  display: block;
+}
+.stats span {
+  color: var(--mut);
+  font-size: 0.9rem;
+}
+section.sec {
+  margin-top: 64px;
+}

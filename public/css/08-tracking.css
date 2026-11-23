@@ -1,0 +1,84 @@
+/* ==========================================================
+   FILE : css/08-tracking.css
+   ISI  : Halaman Tracking (timeline status)
+   ========================================================== */
+
+/* --- TIMELINE STATUS PESANAN --- */
+.stp {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin: 34px 0 10px;
+  text-align: center;
+}
+.stp::before,
+.stp i.pr {
+  content: "";
+  position: absolute;
+  top: 21px;
+  left: 10%;
+  height: 5px;
+  border-radius: 5px;
+  background: var(--line);
+}
+.stp::before {
+  right: 10%;
+}
+.stp i.pr {
+  background: var(--pr);
+  transition: width 1.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  width: 0;
+}
+.sp {
+  position: relative;
+  font-size: 0.78rem;
+  color: var(--mut);
+}
+.sp b {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin: 0 auto 6px;
+  border-radius: 50%;
+  background: var(--card);
+  border: 3px solid var(--line);
+  transition: 0.5s 0.3s;
+  font-size: 1.1rem;
+}
+.sp.dn b {
+  background: var(--pr);
+  border-color: var(--pr);
+  color: #fff;
+}
+.sp.cu b {
+  animation: pl 1.6s infinite;
+}
+.sp.dn {
+  color: var(--tx);
+}
+@keyframes pl {
+  0% {
+    box-shadow: 0 0 0 0 #a2333688;
+  }
+  100% {
+    box-shadow: 0 0 0 16px #a2333600;
+  }
+}
+
+/* --- LENCANA STATUS (Sudah dibayar, Baru, dll) --- */
+.bdg {
+  display: inline-block;
+  border-radius: 99px;
+  padding: 1px 12px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  background: var(--soft);
+  color: var(--h);
+  border: 1px solid var(--line);
+}
+.bdg.ok {
+  background: #dcefe0;
+  color: #2f6b3a;
+  border-color: #b9dcc0;
+}

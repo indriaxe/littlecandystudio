@@ -1,0 +1,113 @@
+/* ==========================================================
+   FILE : css/05-katalog.css
+   ISI  : Halaman Katalog: pencarian, filter, pagination
+   ========================================================== */
+
+/* --- LAYOUT KATALOG --- */
+.kt {
+  display: grid;
+  grid-template-columns: 230px 1fr;
+  gap: 34px;
+}
+@media (max-width: 820px) {
+  .kt {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- PENCARIAN --- */
+.srch {
+  display: flex;
+  border: 2px solid var(--pr);
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--card);
+  margin: 14px 0 18px;
+  transition: box-shadow 0.3s;
+}
+.srch:focus-within {
+  box-shadow: 0 0 0 4px var(--soft);
+}
+.srch input {
+  flex: 1;
+  border: 0;
+  padding: 8px 12px;
+  background: none;
+  min-width: 0;
+  outline: 0;
+}
+
+/* --- FILTER (kategori, harga, urutan) --- */
+.fg h4 {
+  font-family: "Baloo 2";
+  color: var(--h);
+  margin: 16px 0 6px;
+}
+.op {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 0;
+  cursor: pointer;
+  color: var(--tx);
+}
+.op i {
+  width: 24px;
+  height: 24px;
+  border-radius: 7px;
+  border: 2px solid var(--pr);
+  background: var(--card);
+  display: grid;
+  place-items: center;
+  transition: 0.3s;
+  flex: none;
+}
+.op.on i {
+  background: var(--pr);
+}
+/* tanda centang */
+.op i::after {
+  content: "";
+  width: 6px;
+  height: 11px;
+  border: solid #fff;
+  border-width: 0 3px 3px 0;
+  margin-top: -3px;
+  transform: rotate(45deg) scale(0);
+  transition: 0.3s;
+}
+.op.on i::after {
+  transform: rotate(45deg) scale(1);
+}
+.op:hover i {
+  transform: scale(1.15);
+}
+
+/* --- PAGINATION & PESAN KOSONG --- */
+.pg {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 34px;
+}
+.pg button {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 2px solid var(--pr);
+  background: none;
+  color: var(--h);
+  font-weight: 600;
+  transition: 0.3s;
+}
+.pg button.on,
+.pg button:hover {
+  background: var(--pr);
+  color: #fff;
+}
+.empty {
+  grid-column: 1/-1;
+  text-align: center;
+  color: var(--mut);
+  padding: 50px 0;
+}

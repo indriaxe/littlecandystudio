@@ -1,0 +1,106 @@
+/* ==========================================================
+   FILE : css/07-keranjang.css
+   ISI  : Halaman Keranjang
+   ========================================================== */
+
+/* --- LAYOUT KERANJANG --- */
+.cw {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 26px;
+  align-items: start;
+}
+@media (max-width: 860px) {
+  .cw {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- ITEM KERANJANG --- */
+.ci {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+  animation: pg 0.5s;
+}
+.ci:last-child {
+  border: 0;
+}
+.ci img,
+.ci .ph {
+  width: 78px;
+  height: 78px;
+  border-radius: 16px;
+  object-fit: cover;
+  flex: none;
+  background: var(--soft);
+}
+.ci .inf {
+  flex: 1;
+  min-width: 0;
+}
+.ci small {
+  color: var(--mut);
+}
+.ci b {
+  display: block;
+  color: var(--h);
+  font-family: "Baloo 2";
+}
+
+/* --- TOMBOL JUMLAH --- */
+.qt {
+  display: inline-flex;
+  align-items: center;
+  border: 2px solid var(--pr);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.qt button {
+  width: 30px;
+  height: 30px;
+  background: none;
+  color: var(--h);
+  font-size: 1.1rem;
+}
+.qt button:hover {
+  background: var(--soft);
+}
+.qt span {
+  min-width: 28px;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* --- TOMBOL HAPUS --- */
+.rm {
+  background: none;
+  color: var(--mut);
+  font-size: 0.8rem;
+  text-decoration: underline;
+}
+
+/* --- RINGKASAN HARGA --- */
+.smy {
+  position: sticky;
+  top: 90px;
+}
+.rw {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  font-size: 0.92rem;
+}
+.rw.tt {
+  border-top: 2px solid var(--line);
+  margin-top: 8px;
+  padding-top: 10px;
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+.smy .pill {
+  width: 100%;
+  margin-top: 12px;
+}

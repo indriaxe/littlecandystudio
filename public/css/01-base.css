@@ -1,0 +1,189 @@
+/* ==========================================================
+   FILE : css/01-base.css
+   ISI  : Variabel warna, reset, tombol, wadah halaman
+   ========================================================== */
+
+/* --- VARIABEL WARNA & UKURAN  (ubah warna brand di sini) --- */
+:root {
+  --bg: #fff8f2;
+  --card: #fff;
+  --tx: #3a1f20;
+  --mut: #8a6a68;
+  --pr: #a23336;
+  --pr2: #832629;
+  --h: #a23336;
+  --line: #f0d6d0;
+  --soft: #fbe9e4;
+  --gold: #f6d88b;
+  --ft: #a23336;
+  --sh: 0 10px 30px rgba(162, 51, 54, 0.15);
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1c1213;
+    --card: #2a1b1c;
+    --tx: #f7e9e5;
+    --mut: #c4a29e;
+    --pr: #c4474b;
+    --pr2: #d9595d;
+    --h: #ff9d9b;
+    --line: #4a2f30;
+    --soft: #35201f;
+    --ft: #4d1a1c;
+    --sh: 0 10px 30px rgba(0, 0, 0, 0.4);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1c1213;
+  --card: #2a1b1c;
+  --tx: #f7e9e5;
+  --mut: #c4a29e;
+  --pr: #c4474b;
+  --pr2: #d9595d;
+  --h: #ff9d9b;
+  --line: #4a2f30;
+  --soft: #35201f;
+  --ft: #4d1a1c;
+  --sh: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* --- RESET & GAYA DASAR --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+}
+body {
+  font-family: Poppins, system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--tx);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+h1,
+h2,
+h3 {
+  font-family: "Bagel Fat One", "Baloo 2", cursive;
+  color: var(--h);
+  font-weight: 400;
+  line-height: 1.15;
+}
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+button {
+  cursor: pointer;
+  border: 0;
+}
+:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  background: var(--card);
+  z-index: 60;
+}
+
+/* --- WADAH HALAMAN & ANIMASI TRANSISI --- */
+main {
+  min-height: 80vh;
+}
+.page {
+  display: none;
+  padding: 28px 3vw 70px;
+  max-width: 1700px;
+  margin: auto;
+}
+.page.act {
+  display: block;
+  animation: pg 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@keyframes pg {
+  from {
+    opacity: 0;
+    transform: translateY(22px) scale(0.985);
+    filter: blur(4px);
+  }
+}
+.rv {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.7s ease var(--d, 0ms),
+    transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) var(--d, 0ms);
+}
+.rv.on {
+  opacity: 1;
+  transform: none;
+}
+
+/* --- TOMBOL (.pill) --- */
+.pill {
+  background: var(--pr);
+  color: #fff;
+  border-radius: 99px;
+  padding: 10px 24px;
+  font-weight: 600;
+  transition: 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.pill:hover {
+  background: var(--pr2);
+  transform: translateY(-2px);
+  box-shadow: var(--sh);
+}
+.pill:active {
+  transform: scale(0.96);
+}
+.pill.ol {
+  background: transparent;
+  color: var(--h);
+  border: 2px solid var(--pr);
+}
+.pill.ol:hover {
+  background: var(--soft);
+}
+.pill.sm {
+  padding: 4px 16px;
+  font-size: 0.78rem;
+  background: #fff;
+  color: var(--pr);
+}
+.pill.sm:hover {
+  background: var(--gold);
+  color: #5a1a1c;
+}
+
+/* --- TEKS UMUM --- */
+.sub {
+  color: var(--mut);
+  margin: 6px 0 24px;
+}
+.t {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+}
+.c {
+  text-align: center;
+}
+
+/* --- TOMBOL (.pill) --- */
+a.pill {
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+}
