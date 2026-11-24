@@ -32,9 +32,9 @@ function renderCart() {
           return `<div class="ci"><div class="ph">${p.img ? `<img src="${p.img}" alt="">` : sun}</div><div class="inf"><small>${p.k}</small><b>${e0(p.n)}</b><small>${fmt(p.pr)}</small><br><button class="rm" data-r="${id}">Hapus</button></div><div class="qt"><button data-m="${id}" aria-label="Kurangi">−</button><span>${cart[id]}</span><button data-a="${id}" aria-label="Tambah">+</button></div><b style="min-width:92px;text-align:right">${fmt(p.pr * cart[id])}</b></div>`;
         })
         .join("")
-    : '<div class="empty" style="padding:60px 0"><div style="font-size:3rem">🧺</div><h3 style="margin:6px 0">Keranjangmu masih kosong</h3><p class="sub" style="margin:6px 0 18px">Pilih bunga dari katalog, atau buat custom order.</p><a class="pill" href="#katalog">Ke katalog</a></div>';
+    : '<div class="empty" style="padding:60px 0"><div style="font-size:3rem">🧺</div><h3 style="margin:6px 0">Keranjangmu masih kosong</h3><p class="sub" style="margin:6px 0 18px">Pilih bunga dari katalog, atau buat custom order.</p><a class="pill" href="katalog">Ke katalog</a></div>';
   $("#cs").innerHTML =
-    `<h2 style="font-size:1.5rem;margin-bottom:8px">Rincian harga</h2><div class="rw"><span>Produk</span><span>${fmt(sb)}</span></div><div class="rw"><span>Ongkir</span><span style="font-size:.8rem">dihitung saat membuat pesanan</span></div><div class="rw tt"><span>Total</span><span>${fmt(sb)}</span></div><button class="pill" id="pay"${ids.length ? "" : ' disabled style="opacity:.5"'}>Buat pesanan</button><a class="pill ol" href="#katalog" style="width:100%;margin-top:8px">Tambah produk</a>`;
+    `<h2 style="font-size:1.5rem;margin-bottom:8px">Rincian harga</h2><div class="rw"><span>Produk</span><span>${fmt(sb)}</span></div><div class="rw"><span>Ongkir</span><span style="font-size:.8rem">dihitung saat membuat pesanan</span></div><div class="rw tt"><span>Total</span><span>${fmt(sb)}</span></div><button class="pill" id="pay"${ids.length ? "" : ' disabled style="opacity:.5"'}>Buat pesanan</button><a class="pill ol" href="katalog" style="width:100%;margin-top:8px">Tambah produk</a>`;
   $$("[data-a]").forEach(
     (b) =>
       (b.onclick = () => {

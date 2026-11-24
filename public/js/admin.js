@@ -771,7 +771,6 @@ function katBox() {
   );
 }
 function vS() {
-  let qNew = ""; // gambar QRIS baru (belum disimpan)
   const L = [
     ["wa", "Nomor WhatsApp studio (format 62...)"],
     ["qrisNama", "Nama merchant QRIS"],
@@ -783,7 +782,7 @@ function vS() {
     ["min", "Ongkir minimum (Rp)"],
   ];
   $("#av").innerHTML =
-    `<h2 class="t">Pengaturan</h2><div class="box" id="kb" style="margin-top:14px"></div><form class="box fr" id="sf" style="margin-top:20px">${L.map((x) => `<label${x[0] == "qrisNama" ? ' class="full"' : ""}>${x[1]}<input name="${x[0]}" value="${e0(S[x[0]])}"></label>`).join("")}<div class="full"><b style="font-size:.92rem;font-weight:500">Gambar QRIS pembayaran</b><div class="qr" style="margin:8px 0 0;max-width:230px"><img id="qpv" src="${e0(S.qris)}" alt="QRIS"></div><span class="fi" style="margin-top:8px"><b>Upload QRIS</b><em id="qn" style="font-style:normal">png atau jpg, foto QRIS dari bank / e-wallet</em><input type="file" id="qf" accept="image/*"></span></div><div class="es full" id="sp"></div><div class="full" style="display:flex;gap:10px;flex-wrap:wrap"><button class="pill">Simpan pengaturan</button></div></form><form class="box fr" id="af" style="margin-top:20px" novalidate><h3 class="full">Akun admin</h3><p class="sub full" style="margin:0;font-size:.9rem">Ganti username dan/atau password login admin. Kosongkan password baru bila hanya ingin ganti username.</p><label class="full">Username<input name="au" value="${e0(admUser)}" autocomplete="username"></label><label class="full">Password saat ini <span>*</span><input name="ac" type="password" autocomplete="current-password"></label><label>Password baru<input name="an" type="password" placeholder="minimal 8 karakter" autocomplete="new-password"></label><label>Ulangi password baru<input name="ar" type="password" autocomplete="new-password"></label><label class="full" style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" id="asp" style="width:auto;margin:0"> Tampilkan password</label><div class="full"><button class="pill">Simpan akun admin</button></div></form>`;
+    `<h2 class="t">Pengaturan</h2><div class="box" id="kb" style="margin-top:14px"></div><form class="box fr" id="sf" style="margin-top:20px">${L.map((x) => `<label${x[0] == "qrisNama" ? ' class="full"' : ""}>${x[1]}<input name="${x[0]}" value="${e0(S[x[0]])}"></label>`).join("")}<div class="full"><b style="font-size:.92rem;font-weight:500">Gambar QRIS pembayaran</b><div class="qr" style="margin:8px 0 0;max-width:230px"><img id="qpv" src="${e0(S.qris)}" alt="QRIS"></div><label class="fi" style="margin-top:8px"><b>Upload QRIS</b><em id="qn" style="font-style:normal">png atau jpg, foto QRIS dari bank / e-wallet</em><input type="file" id="qf" accept="image/*"></label></div><div class="es full" id="sp"></div><div class="full" style="display:flex;gap:10px;flex-wrap:wrap"><button class="pill">Simpan pengaturan</button></div></form><form class="box fr" id="af" style="margin-top:20px" novalidate><h3 class="full">Akun admin</h3><p class="sub full" style="margin:0;font-size:.9rem">Ganti username dan/atau password login admin. Kosongkan password baru bila hanya ingin ganti username.</p><label class="full">Username<input name="au" value="${e0(admUser)}" autocomplete="username"></label><label class="full">Password saat ini <span>*</span><input name="ac" type="password" autocomplete="current-password"></label><label>Password baru<input name="an" type="password" placeholder="minimal 8 karakter" autocomplete="new-password"></label><label>Ulangi password baru<input name="ar" type="password" autocomplete="new-password"></label><label class="full" style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" id="asp" style="width:auto;margin:0"> Tampilkan password</label><div class="full"><button class="pill">Simpan akun admin</button></div></form>`;
   katBox();
   // Form akun admin
   const af = $("#af");
@@ -818,11 +817,22 @@ function vS() {
   $("#qf").onchange = (e) => {
     const fl = e.target.files[0];
     if (!fl) return;
-    rs(fl, 700, (u) => {
-      qNew = u;
-      $("#qpv").src = u;
-      $("#qn").textContent = fl.name + " (klik Simpan pengaturan)";
-    });
+    $("#qn").textContent = "Mengunggah " + fl.name + "...";
+    // QRIS langsung disimpan begitu dipilih (tidak perlu klik Simpan pengaturan lagi)
+    rs(
+      fl,
+      900,
+      (u) =>
+        api("PUT", "api/admin/settings", { qris: u })
+          .then((r) => {
+            S = r;
+            $("#qpv").src = r.qris;
+            $("#qn").textContent = "QRIS tersimpan ✓ (" + fl.name + ")";
+            toast("QRIS berhasil diganti");
+          })
+          .catch(() => ($("#qn").textContent = "Gagal mengunggah, coba lagi")),
+      true,
+    );
   };
   f.oninput = pv;
   pv();
@@ -830,7 +840,6 @@ function vS() {
     e.preventDefault();
     const d = {};
     L.forEach((x) => (d[x[0]] = ["wa", "qrisNama", "jam"].includes(x[0]) ? f[x[0]].value : +f[x[0]].value || 0));
-    if (qNew) d.qris = qNew;
     api("PUT", "api/admin/settings", d)
       .then((r) => {
         S = r;

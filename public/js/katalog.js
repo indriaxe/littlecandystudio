@@ -69,7 +69,7 @@ function kat() {
         .slice((F.p - 1) * PER, F.p * PER)
         .map(card)
         .join("")
-    : '<p class="empty">Tidak ada produk yang cocok. Coba ubah filter, atau buat <a href="#custom">custom order</a>.</p>';
+    : '<p class="empty">Tidak ada produk yang cocok. Coba ubah filter, atau buat <a href="custom">custom order</a>.</p>';
   $("#pgn").innerHTML =
     pc > 1
       ? Array.from(

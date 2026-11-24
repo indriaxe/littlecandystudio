@@ -41,7 +41,7 @@ async function api(method, url, body, opt = {}) {
       msg = "Sesi admin berakhir, silakan masuk lagi.";
       adm = false;
       adLoaded = false;
-      if (location.hash == "#admin") admin();
+      if (pageName() == "admin") admin();
     }
     if (!opt.quiet) toast(msg);
     const err = new Error(msg);

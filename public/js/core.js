@@ -69,7 +69,15 @@ const payCh = (t) =>
 const media = (p) => (p.img ? `<img src="${p.img}" alt="${e0(p.n)}" loading="lazy">` : sun);
 const gp = (id) => P.find((p) => p.id == id);
 // Pindah halaman (tetap memuat ulang bila sudah di halaman yang sama)
-const go = (h) => (location.hash == "#" + h ? route() : (location.hash = h));
+// Alamat halaman memakai path biasa (/katalog, /custom, ...), bukan #hash.
+// BASE = alamat dasar website (dari <base href> di app.blade.php), biasanya "/".
+const BASE = new URL(document.baseURI).pathname.replace(/\/?$/, "/");
+const pageName = () => location.pathname.slice(BASE.length).replace(/\/+$/, "").split("/")[0];
+// Pindah halaman tanpa memuat ulang: go("katalog") -> /katalog
+const go = (h) => {
+  if (pageName() != h) history.pushState(null, "", BASE + h);
+  route();
+};
 
 // Penyimpanan di browser (localStorage) sekarang hanya dipakai untuk KERANJANG tiap pengunjung
 const ld = (k, d) => {
@@ -116,17 +124,20 @@ const ST = [
   ["✅", "Selesai"],
 ];
 // Perkecil foto di browser sebelum dikirim ke server (hemat kuota & ruang simpan)
-function rs(f, max, cb) {
+// png = true: simpan sebagai PNG tanpa kompresi lossy (dipakai untuk QRIS supaya tetap bisa di-scan)
+function rs(f, max, cb, png) {
   const r = new FileReader();
   r.onload = () => {
     const g = new Image();
+    g.onerror = () => toast("Gambar tidak bisa dibaca. Pakai file JPG atau PNG ya.");
     g.onload = () => {
+      if (!g.width) return toast("Gambar tidak bisa dibaca. Pakai file JPG atau PNG ya.");
       const k = Math.min(1, max / g.width),
         c = document.createElement("canvas");
       c.width = g.width * k;
       c.height = g.height * k;
       c.getContext("2d").drawImage(g, 0, 0, c.width, c.height);
-      cb(c.toDataURL("image/jpeg", 0.72));
+      cb(png ? c.toDataURL("image/png") : c.toDataURL("image/jpeg", 0.72));
     };
     g.src = r.result;
   };

@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class PageController extends Controller
 {
     /** Halaman utama (satu halaman, perpindahan menu ditangani JavaScript lewat #hash). */
-    public function index()
+    public function index(string $page = "")
     {
         $products = Product::with('category')
             ->where('is_active', true)

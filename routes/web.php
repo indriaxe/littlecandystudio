@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 // Halaman utama (semua menu ada di satu halaman, diatur JavaScript)
 Route::get('/', [PageController::class, 'index']);
+// Setiap halaman punya alamat sendiri (/katalog, /custom, ...). Daftar ini harus sama dengan objek R di public/js/main.js
+Route::get('/{page}', [PageController::class, 'index'])
+    ->whereIn('page', ['beranda', 'katalog', 'custom', 'lacak', 'keranjang', 'bantuan', 'admin']);
 
 Route::prefix('api')->group(function () {
 

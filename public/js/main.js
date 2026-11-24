@@ -1,13 +1,13 @@
 /* ==========================================================
    FILE : js/main.js
    ISI  : FOOTER, TEMA, ROUTER & INISIALISASI
-   TIPS : Router berbasis hash (#beranda, #katalog, ...). Daftar halaman: objek R. Kode ini harus dimuat paling akhir.
+   TIPS : Router berbasis path (/beranda, /katalog, ...). Daftar halaman: objek R (daftar yang sama ada di routes/web.php). Kode ini harus dimuat paling akhir.
    ========================================================== */
 
 // Footer (nomor WA, jam buka, dan hari pre-order mengikuti Pengaturan admin)
 function renderFooter() {
   $("#ft").innerHTML =
-    `<div class="fg3"><div><h3>Little Candy Studio</h3><p>Bunga chenille stem handmade untuk setiap momen. Pre-order minimal ${S.po} hari sebelum hari-H.</p></div><div><h3>Hubungi kami</h3><a href="https://instagram.com/littlecandy_studio" target="_blank" rel="noopener">Instagram @littlecandy_studio</a><a href="mailto:emailseller@gmail.com">emailseller@gmail.com</a><a href="https://wa.me/${S.wa}" target="_blank" rel="noopener">WhatsApp ${e0(S.wa)}</a></div><div><h3>Studio</h3><p>Pakisaji, Kabupaten Malang, Jawa Timur</p><p>${e0(S.jam)}</p><a href="#bantuan">Kirim keluhan atau pertanyaan</a></div><div class="sm2"><span>© 2026 Little Candy Studio</span></div></div>`;
+    `<div class="fg3"><div><h3>Little Candy Studio</h3><p>Bunga chenille stem handmade untuk setiap momen. Pre-order minimal ${S.po} hari sebelum hari-H.</p></div><div><h3>Hubungi kami</h3><a href="https://instagram.com/littlecandy_studio" target="_blank" rel="noopener">Instagram @littlecandy_studio</a><a href="mailto:indriarahmaaulia@gmail.com">indriarahmaaulia@gmail.com</a><a href="https://wa.me/${S.wa}" target="_blank" rel="noopener">WhatsApp ${e0(S.wa)}</a></div><div><h3>Studio</h3><p>Pakisaji, Kabupaten Malang, Jawa Timur</p><p>${e0(S.jam)}</p><a href="bantuan">Kirim keluhan atau pertanyaan</a></div><div class="sm2"><span>© 2026 Little Candy Studio</span></div></div>`;
 }
 $("#tm").onclick = () => {
   const d = document.documentElement,
@@ -38,10 +38,13 @@ const R = {
   bantuan: faq,
   admin: admin,
 };
-// Router: tampilkan halaman sesuai hash di URL
+// Router: tampilkan halaman sesuai alamat (path) di URL, misalnya /katalog
 function route() {
-  let n = location.hash.slice(1);
-  if (!R[n]) n = "beranda";
+  let n = pageName();
+  if (!R[n]) {
+    n = "beranda";
+    history.replaceState(null, "", BASE + "beranda"); // "/" atau alamat tak dikenal -> /beranda
+  }
   $$(".page").forEach((p) => p.classList.remove("act"));
   const pg = $("#pg-" + n);
   pg.classList.add("act");
@@ -51,11 +54,21 @@ function route() {
   scrollTo({ top: 0 });
   reveal();
 }
-addEventListener("hashchange", route);
+addEventListener("popstate", route); // tombol back / forward browser
+// Klik link internal (mis. /katalog): pindah halaman tanpa memuat ulang
 document.addEventListener("click", (e) => {
-  const a = e.target.closest('a[href^="#"]');
-  if (a && e.target.closest("button")) location.hash = a.getAttribute("href").slice(1);
+  if (e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+  const a = e.target.closest("a[href]");
+  if (!a || a.target == "_blank" || a.hasAttribute("download") || a.getAttribute("href").startsWith("#")) return;
+  const u = new URL(a.href);
+  if (u.origin != location.origin || !u.pathname.startsWith(BASE)) return;
+  const n = u.pathname.slice(BASE.length).replace(/\/+$/, "");
+  if (!R[n]) return;
+  e.preventDefault();
+  go(n);
 });
+// Link lama berbentuk /#katalog dialihkan ke /katalog
+if (R[location.hash.slice(1)]) history.replaceState(null, "", BASE + location.hash.slice(1));
 for (let i = 0; i < 9; i++) {
   const s = document.createElement("span");
   s.className = "pt";

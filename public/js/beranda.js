@@ -22,7 +22,7 @@ function hero() {
           `<div class="sl${i ? "" : " on"}">${a.map((k) => `<img src="${I[k]}" alt="">`).join("")}<img src="${I[s[(i + 1) % 4][0]]}" alt=""></div>`,
       )
       .join("") +
-    `<div class="ht"><span class="chip">Handmade di Pakisaji, Malang</span><h1>Little Candy Studio</h1><p>Buket, kartu ucapan, dan hadiah dari kawat chenille. Pilih dari katalog atau ceritakan idemu, kami wujudkan sesuai warna dan momennya.</p><a href="#katalog"><button class="pill">Lihat katalog</button></a><a href="#custom"><button class="pill ol">Buat custom order</button></a></div><div class="dots">${s.map((_, i) => `<i class="${i ? "" : "on"}" data-s="${i}"></i>`).join("")}</div>`;
+    `<div class="ht"><span class="chip">Handmade di Pakisaji, Malang</span><h1>Little Candy Studio</h1><p>Buket, kartu ucapan, dan hadiah dari kawat chenille. Pilih dari katalog atau ceritakan idemu, kami wujudkan sesuai warna dan momennya.</p><a href="katalog"><button class="pill">Lihat katalog</button></a><a href="custom"><button class="pill ol">Buat custom order</button></a></div><div class="dots">${s.map((_, i) => `<i class="${i ? "" : "on"}" data-s="${i}"></i>`).join("")}</div>`;
   const go = (n) => {
     si = n;
     $$(".sl").forEach((e, i) => e.classList.toggle("on", i == n));

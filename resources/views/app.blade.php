@@ -35,15 +35,15 @@
   <body>
     <!-- ===== NAVBAR (menu atas + tombol tema + login admin) ===== -->
     <nav>
-      <a class="logo" href="#beranda">Little Candy<br />Studio</a>
+      <a class="logo" href="beranda">Little Candy<br />Studio</a>
       <div class="nl" id="nl">
-        <a href="#beranda" data-n="beranda">Beranda</a><a href="#katalog" data-n="katalog">Katalog</a
-        ><a href="#custom" data-n="custom">Custom Order</a><a href="#lacak" data-n="lacak">Lacak Pesanan</a
-        ><a href="#bantuan" data-n="bantuan">Bantuan &amp; FAQ</a
-        ><a href="#keranjang" data-n="keranjang">Keranjang<span class="bd" id="bd">0</span></a>
+        <a href="beranda" data-n="beranda">Beranda</a><a href="katalog" data-n="katalog">Katalog</a
+        ><a href="custom" data-n="custom">Custom Order</a><a href="lacak" data-n="lacak">Lacak Pesanan</a
+        ><a href="bantuan" data-n="bantuan">Bantuan &amp; FAQ</a
+        ><a href="keranjang" data-n="keranjang">Keranjang<span class="bd" id="bd">0</span></a>
       </div>
       <button class="ic" id="tm" title="Ganti tema" aria-label="Ganti tema">◐</button>
-      <a class="ic" href="#admin" title="Login admin" aria-label="Login admin"
+      <a class="ic" href="admin" title="Login admin" aria-label="Login admin"
         ><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
           <circle cx="12" cy="8" r="4.5" />
           <path d="M3.5 21c0-5 3.8-7 8.5-7s8.5 2 8.5 7z" /></svg
@@ -140,13 +140,13 @@
         <div class="box">
           <h2 class="t">Lacak pesanan</h2>
           <p class="sub">
-            Masukkan kode pesanan yang telah kamu dapat saat memesan. Kode yang telah kamu dapat merupakan kode rahasia yang hanya kamu yang tahu. Jangan bagikan kode ini ke orang lain, karena kode ini digunakan untuk melihat status pesananmu.
+            Masukkan kode pesanan/custom/keluhan kamu untuk melacak kemajuan pesananmu. Kode ini bersifat unik dan rahasia, jadi jangan dibagikan ke orang lain. Jika belum punya kode, hubungi admin lewat WhatsApp.
           </p>
           <div style="display: flex; gap: 10px">
             <input
               class="in"
               id="tc"
-              placeholder="Contoh: IS001"
+              placeholder="Contoh: LCS001"
               aria-label="Kode pesanan"
               style="margin: 0; border-radius: 99px"
             /><button class="pill" id="tb">Cari</button>
